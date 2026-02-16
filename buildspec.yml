@@ -3,15 +3,22 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto11
+      java: corretto17
+    commands:
+      - echo Installing dependencies
+      - mvn install -DskipTests
   build:
     commands:
-      - echo "Building Spring Boot app"
+      - echo Building the Spring Boot application
       - mvn clean package
   post_build:
     commands:
-      - echo "Preparing deployment zip"
-      - zip -r aws-basic-app.zip target/*.jar
+      - echo Preparing deployment zip
+      - mkdir -p deploy
+      - cp target/*.jar deploy/
+      - cd deploy
+      - zip -r ../aws-basic-app.zip .
+      - cd ..
 
 artifacts:
   files:
