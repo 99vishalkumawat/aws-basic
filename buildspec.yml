@@ -13,13 +13,17 @@ phases:
       - mvn clean package
   post_build:
     commands:
-      - echo Preparing deployment zip
-      - mkdir -p deploy
-      - cp target/*.jar deploy/
-      - cd deploy
-      - zip -r ../aws-basic-app.zip .
+      - echo Preparing deployment artifact
+      # create the output folder that matches your CodePipeline output artifact
+      - mkdir -p BuildOutput
+      # copy the jar file(s) into BuildOutput
+      - cp target/*.jar BuildOutput/
+      # go into BuildOutput and create the zip file
+      - cd BuildOutput
+      - zip -r aws-basic-app.zip .
       - cd ..
 
 artifacts:
+  # This must match the name of the output artifact in CodePipeline
   files:
-    - aws-basic-app.zip
+    - BuildOutput/aws-basic-app.zip
