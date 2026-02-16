@@ -14,16 +14,17 @@ phases:
   post_build:
     commands:
       - echo Preparing deployment artifact
-      # create the output folder that matches your CodePipeline output artifact
+      # create the output folder
       - mkdir -p BuildOutput
-      # copy the jar file(s) into BuildOutput
+      # copy the JAR file(s) into BuildOutput
       - cp target/*.jar BuildOutput/
-      # go into BuildOutput and create the zip file
+      # go into BuildOutput and create the zip
       - cd BuildOutput
       - zip -r aws-basic-app.zip .
       - cd ..
 
 artifacts:
-  # This must match the name of the output artifact in CodePipeline
+  # base-directory points to where your zip file is
+  base-directory: BuildOutput
   files:
     - aws-basic-app.zip
