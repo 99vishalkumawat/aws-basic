@@ -14,4 +14,9 @@ public class SampleController {
     public ResponseEntity<String> pay() {
         return ResponseEntity.ok("sample get api");
     }
+
+    @GetMapping("/second")
+    public ResponseEntity<String> pay() {
+        return ResponseEntity.ok("sample second get api");
+    }
 }
