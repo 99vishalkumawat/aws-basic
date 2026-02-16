@@ -26,4 +26,4 @@ phases:
 artifacts:
   # This must match the name of the output artifact in CodePipeline
   files:
-    - BuildOutput/aws-basic-app.zip
+    - aws-basic-app.zip
